@@ -1,6 +1,13 @@
 'use strict';
 var conn = require('../../config/db.config');
 
+/*
+Create table Credentials(
+    idUser INT NOT NULL PRIMARY KEY UNIQUE,
+    userName TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL);
+*/
+
 var Credential = function (credential) {
     this.idUser = credential.idUser;
     this.userName = credential.userName;

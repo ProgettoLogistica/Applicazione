@@ -1,6 +1,21 @@
 'use strict';
 var conn = require('../../config/db.config');
 
+/*
+Create table Parcel(
+    id INT NOT NULL PRIMARY KEY UNIQUE,
+    height INT NOT NULL,
+    width INT NOT NULL,
+    depth INT NOT NULL,
+    weigth INT NOT NULL,
+    position INT NOT NULL,
+    checkInDate DATE NOT NULL,
+    deliveryAttempts INT NOT NULL,
+    priority INT NOT NULL,
+    idUser INT NOT NULL,
+    idDeliveryMan INT NOT NULL);
+*/
+
 var Parcel = function (parcel) {
     this.ID = parcel.ID;
     this.height = parcel.height;

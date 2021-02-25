@@ -1,6 +1,17 @@
 'use strict';
 var conn = require('../../config/db.config');
 
+/*
+Create table Users(
+    id INT NOT NULL PRIMARY KEY UNIQUE,
+    last_name TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    address TEXT NOT NULL,
+    phone TEXT,
+    email TEXT,
+    role INT NOT NULL);
+*/
+
 var User = function (user) {
     this.ID = user.ID;
     this.last_name = user.last_name;

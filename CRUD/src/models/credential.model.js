@@ -28,7 +28,7 @@ Credential.create = function (newcredential, result) {
 };
 
 Credential.findById = function (idUser, result) {
-    conn.query("Select * from credentials where ID = ? ", idUser, function (err, res) {
+    conn.query("Select * from credentials where idUser = ? ", idUser, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -53,7 +53,7 @@ Credential.findAll = function (result) {
 };
 
 Credential.update = function (idUser, credential, result) {
-    conn.query("UPDATE credentials SET userName=?, password=? WHERE id = ?", [credential.userName, credential.password, idUser], function (err, res) {
+    conn.query("UPDATE credentials SET userName=?, password=? WHERE idUser = ?", [credential.userName, credential.password, idUser], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -64,7 +64,7 @@ Credential.update = function (idUser, credential, result) {
 };
 
 Credential.delete = function (id, result) {
-    conn.query("DELETE FROM credentials WHERE id = ?", [id], function (err, res) {
+    conn.query("DELETE FROM credentials WHERE idUser = ?", [id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

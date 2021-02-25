@@ -2,13 +2,13 @@
 var conn = require('../../config/db.config');
 
 /*
-Create table Parcel(
+Create table Parcels(
     id INT NOT NULL PRIMARY KEY UNIQUE,
     height INT NOT NULL,
     width INT NOT NULL,
     depth INT NOT NULL,
-    weigth INT NOT NULL,
-    position INT NOT NULL,
+    weight INT NOT NULL,
+    position TEXT NOT NULL,
     checkInDate DATE NOT NULL,
     deliveryAttempts INT NOT NULL,
     priority INT NOT NULL,
@@ -69,7 +69,7 @@ Parcel.findAll = function (result) {
 };
 
 Parcel.update = function (id, parcel, result) {
-    conn.query("UPDATE Parcels SET height=?, width=?, depth=?, weight=?, position=?, checkInDate=?, deliveryAttempts=?, priority=?, IdUser=?, idDeliveryMan WHERE id = ?", [parcel.height, parcel.width, parcel.depth, parcel.weight, parcel.position, parcel.checkInDate, parcel.deliveryAttempts, parcel.priority, parcel.IdUser, idDeliveryMan, id], function (err, res) {
+    conn.query("UPDATE Parcels SET height=?, width=?, depth=?, weight=?, position=?, checkInDate=?, deliveryAttempts=?, priority=?, IdUser=?, idDeliveryMan=? WHERE id = ?", [parcel.height, parcel.width, parcel.depth, parcel.weight, parcel.position, parcel.checkInDate, parcel.deliveryAttempts, parcel.priority, parcel.IdUser, parcel.idDeliveryMan, id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

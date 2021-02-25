@@ -1,34 +1,34 @@
 'use strict';
-const Parcel = require('../models/parcel.model');
+const Credential = require('../models/Credential.model');
 
 exports.create = function (req, res) {
-    const new_Parcel = new Parcel(req.body);
+    const new_Credential = new Credential(req.body);
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
         res.status(400).send({ error: true, message: 'Please provide all required field' });
     } else {
-        Parcel.create(new_Parcel, function (err, parcel) {
+        Credential.create(new_Credential, function (err, credential) {
             if (err)
                 res.send(err);
-            res.json({ error: false, message: "Parcel added successfully!", data: parcel });
+            res.json({ error: false, message: "Credential added successfully!", data: credential });
         });
     }
 };
 
 exports.findById = function (req, res) {
-    Parcel.findById(req.params.id, function (err, parcel) {
+    Credential.findById(req.params.id, function (err, credential) {
         if (err)
             res.send(err);
-        res.json(parcel);
+        res.json(credential);
     });
 };
 
 exports.findAll = function (req, res) {
-    Parcel.findAll(function (err, parcel) {
+    Credential.findAll(function (err, credential) {
         console.log('controller');
         if (err)
             res.send(err);
-        console.log('res', parcel);
-        res.send(parcel);
+        console.log('res', credential);
+        res.send(credential);
     });
 };
 
@@ -36,18 +36,18 @@ exports.update = function (req, res) {
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
         res.status(400).send({ error: true, message: 'Please provide all required field' });
     } else {
-        Parcel.update(req.params.id, new Parcel(req.body), function (err, parcel) {
+        Credential.update(req.params.id, new Credential(req.body), function (err, credential) {
             if (err)
                 res.send(err);
-            res.json({ error: false, message: 'Parcel successfully updated' });
+            res.json({ error: false, message: 'Credential successfully updated' });
         });
     }
 };
 
 exports.delete = function (req, res) {
-    Parcel.delete(req.params.id, function (err, parcel) {
+    Credential.delete(req.params.id, function (err, credential) {
         if (err)
             res.send(err);
-        res.json({ error: false, message: 'Parcel successfully deleted' });
+        res.json({ error: false, message: 'Credential successfully deleted' });
     });
 };

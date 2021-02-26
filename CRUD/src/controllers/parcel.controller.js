@@ -22,6 +22,22 @@ exports.findById = function (req, res) {
     });
 };
 
+exports.findByIdUser = function (req, res) {
+    Parcel.findByIdUser(req.params.id, function (err, parcel) {
+        if (err)
+            res.send(err);
+        res.json(parcel);
+    });
+};
+
+exports.findByIdDeliveryMan = function (req, res) {
+    Parcel.findByIdDeliveryMan(req.params.id, function (err, parcel) {
+        if (err)
+            res.send(err);
+        res.json(parcel);
+    });
+};
+
 exports.findAll = function (req, res) {
     Parcel.findAll(function (err, parcel) {
         console.log('controller');

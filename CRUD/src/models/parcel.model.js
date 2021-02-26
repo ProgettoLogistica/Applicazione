@@ -55,6 +55,29 @@ Parcel.findById = function (id, result) {
     });
 };
 
+Parcel.findByIdUser = function (idUser, result) {
+    conn.query("Select * from Parcels where idUser = ? ", idUser, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            result(null, res);
+        }
+    });
+};
+Parcel.findByIdDeliveryMan = function (idDeliveryMan, result) {
+    conn.query("Select * from Parcels where idDeliveryMan = ? ", idDeliveryMan, function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            result(null, res);
+        }
+    });
+};
+
 Parcel.findAll = function (result) {
     conn.query("Select * from Parcels", function (err, res) {
         if (err) {

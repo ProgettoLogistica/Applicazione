@@ -27,8 +27,8 @@ Credential.create = function (newcredential, result) {
     });
 };
 
-Credential.findById = function (idUser, result) {
-    conn.query("Select * from credentials where idUser = ? ", idUser, function (err, res) {
+Credential.findById = function (id, result) {
+    conn.query("Select * from credentials where idUser = ?", id, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);

@@ -8,3 +8,14 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 		tileSize: 512,
 		zoomOffset: -1
 	}).addTo(mymap);
+
+//prelevare coordinate da db
+var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+/* alternativa al marker predefinito
+var circle = L.circle([51.508, -0.11], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 400
+}).addTo(mymap);*/

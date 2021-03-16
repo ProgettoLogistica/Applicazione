@@ -28,7 +28,7 @@ exports.findAll = function (req, res) {
         if (err)
             res.send(err);
         console.log('res', credential);
-        res.send(credential);
+        res.json(credential);
     });
 };
 

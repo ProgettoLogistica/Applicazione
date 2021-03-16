@@ -3,7 +3,7 @@ var conn = require('../../config/db.config');
 
 /*
 Create table Users(
-    id INT NOT NULL PRIMARY KEY UNIQUE,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     last_name TEXT NOT NULL,
     first_name TEXT NOT NULL,
     address TEXT NOT NULL,

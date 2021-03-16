@@ -44,7 +44,7 @@ exports.findAll = function (req, res) {
         if (err)
             res.send(err);
         console.log('res', parcel);
-        res.send(parcel);
+        res.json(parcel);
     });
 };
 

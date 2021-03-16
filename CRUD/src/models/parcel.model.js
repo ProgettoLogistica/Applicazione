@@ -3,12 +3,13 @@ var conn = require('../../config/db.config');
 
 /*
 Create table Parcels(
-    id INT NOT NULL PRIMARY KEY UNIQUE,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     height INT NOT NULL,
     width INT NOT NULL,
     depth INT NOT NULL,
     weight INT NOT NULL,
-    position TEXT NOT NULL,
+    x INT NOT NULL,
+    y INT NOT NULL,
     checkInDate DATE NOT NULL,
     deliveryAttempts INT NOT NULL,
     priority INT NOT NULL,
@@ -22,7 +23,9 @@ var Parcel = function (parcel) {
     this.width = parcel.width;
     this.depth = parcel.depth;
     this.weight = parcel.weight;
-    this.position = parcel.position;
+    // this.position = parcel.position;
+    this.x = parcel.x;
+    this.y = parcel.y;
     this.checkInDate = parcel.checkInDate;
     this.deliveryAttempts = parcel.deliveryAttempts;
     this.priority = parcel.priority;
@@ -92,7 +95,7 @@ Parcel.findAll = function (result) {
 };
 
 Parcel.update = function (id, parcel, result) {
-    conn.query("UPDATE Parcels SET height=?, width=?, depth=?, weight=?, position=?, checkInDate=?, deliveryAttempts=?, priority=?, IdUser=?, idDeliveryMan=? WHERE id = ?", [parcel.height, parcel.width, parcel.depth, parcel.weight, parcel.position, parcel.checkInDate, parcel.deliveryAttempts, parcel.priority, parcel.IdUser, parcel.idDeliveryMan, id], function (err, res) {
+    conn.query("UPDATE Parcels SET height=?, width=?, depth=?, weight=?, x=?, y=?, checkInDate=?, deliveryAttempts=?, priority=?, IdUser=?, idDeliveryMan=? WHERE id = ?", [parcel.height, parcel.width, parcel.depth, parcel.weight, parcel.x, parcel.y, parcel.checkInDate, parcel.deliveryAttempts, parcel.priority, parcel.IdUser, parcel.idDeliveryMan, id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

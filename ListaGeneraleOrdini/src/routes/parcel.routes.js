@@ -11,6 +11,7 @@ router.get('/:id', parcelController.findByIdDeliveryMan);
 router.put('/:id', parcelController.update);
 router.delete('/:id', parcelController.delete);
 
+/*
 router.get('/parcels-general-list', function (req, res, next) {
     var sql = 'SELECT * FROM parcels;'
     conn.query(sql, function (err, data, fields) {
@@ -19,5 +20,6 @@ router.get('/parcels-general-list', function (req, res, next) {
         res.render('../../views/parcels-general-list', { title: 'Parcels general list', parcelDatas: data });
     });
 });
+*/
 
 module.exports = router;

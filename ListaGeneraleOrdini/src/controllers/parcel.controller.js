@@ -44,7 +44,8 @@ exports.findAll = function (req, res) {
         if (err)
             res.send(err);
         console.log('res', parcel);
-        res.json(parcel);
+        // res.json(parcel);
+        res.render('../../views/parcels-general-list', { title: 'Parcels general list', parcel: data });
     });
 };
 

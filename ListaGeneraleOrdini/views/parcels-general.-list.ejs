@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parcels General List</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th>Height</th>
+            <th>Width</th>
+            <th>Depth</th>
+            <th>Weight</th>
+            <th>Check in Date</th>
+            <th>Delivery Attempts</th>
+            <th>Priority</th>
+        </thead>
+
+        <%
+            if(parcelDatas.length != 0){
+                var i=1;
+                parcelDatas.forEach(function(data){
+        %>
+
+        <tr>
+            <td><%=i; %></td>
+            <td><% parcelDatas.height %></td>
+            <td><% parcelDatas.width %></td>
+            <td><% parcelDatas.depth %></td>
+            <td><% parcelDatas.weight %></td>
+            <td><% parcelDatas.checkInDate %></td>
+            <td><% parcelDatas.deliveryAttempts %></td>
+            <td><% parcelDatas.priority %></td>
+        </tr>
+        <%      i++; }) %>
+        <% } else { %>
+
+        <tr>
+            <td>You haven't parcels!</td>
+        </tr>
+
+        <% } %>
+    </table>
+</body>
+
+</html>

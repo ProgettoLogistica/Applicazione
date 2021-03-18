@@ -13,6 +13,7 @@ Create table Parcels(
     checkInDate DATE NOT NULL,
     deliveryAttempts INT NOT NULL,
     priority INT NOT NULL,
+    deliveryStatus INT NOT NULL,
     idUser INT NOT NULL,
     idDeliveryMan INT NOT NULL);
 */
@@ -29,6 +30,12 @@ var Parcel = function (parcel) {
     this.checkInDate = parcel.checkInDate;
     this.deliveryAttempts = parcel.deliveryAttempts;
     this.priority = parcel.priority;
+    /* DeliveryStatus:
+        - IN MAGAZZINO = 0
+        - CONSEGNA IN MATTINATA = 1
+        - CONSEGNATO = 2
+    */
+    this.deliveryStatus = parcel.deliveryStatus;
     this.IdUser = parcel.IdUser;
     this.idDeliveryMan = parcel.idDeliveryMan;
 };
@@ -95,7 +102,7 @@ Parcel.findAll = function (result) {
 };
 
 Parcel.update = function (id, parcel, result) {
-    conn.query("UPDATE Parcels SET height=?, width=?, depth=?, weight=?, x=?, y=?, checkInDate=?, deliveryAttempts=?, priority=?, IdUser=?, idDeliveryMan=? WHERE id = ?", [parcel.height, parcel.width, parcel.depth, parcel.weight, parcel.x, parcel.y, parcel.checkInDate, parcel.deliveryAttempts, parcel.priority, parcel.IdUser, parcel.idDeliveryMan, id], function (err, res) {
+    conn.query("UPDATE Parcels SET height=?, width=?, depth=?, weight=?, x=?, y=?, checkInDate=?, deliveryAttempts=?, priority=?, deliveryStatus=?, IdUser=?, idDeliveryMan=? WHERE id = ?", [parcel.height, parcel.width, parcel.depth, parcel.weight, parcel.x, parcel.y, parcel.checkInDate, parcel.deliveryAttempts, parcel.priority, parcel.deliveryStatus, parcel.IdUser, parcel.idDeliveryMan, id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

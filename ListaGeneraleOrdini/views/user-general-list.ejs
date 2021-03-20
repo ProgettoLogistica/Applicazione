@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parcels General List</title>
+    <style>
+        table,
+        td,
+        th {
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <%
+        if(users.length != 0){
+            users.forEach(user =>{
+    %>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Indirizzo</th>
+                <th>Telefono</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td><%=user.first_name %></td>
+                <td><%=user.last_name %></td>
+                <td><%=user.address %></td>
+                <td><%=user.phone %></td>
+                <td><%=user.email %></td>
+            </tr>
+            <%      }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+
+    <p>The user does not exist!</p>
+
+    <% } %>
+</body>
+
+</html>

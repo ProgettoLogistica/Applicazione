@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Parcels General List</title>
+    <style>
+        table,
+        td,
+        th {
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,25 +24,35 @@
                 <th>Stato Pacco</th>
             </tr>
         </thead>
-
-        <%
+        <tbody>
+            <%
             if(parcels.length != 0){
                 var i=1;
                 parcels.forEach(parcel =>{
         %>
 
-        <tr>
-            <td><%=i; %></td>
-            <td><% parcel.deliveryStatus %></td>
-        </tr>
-        <%      i++; }) %>
-        <% } else { %>
+            <tr>
+                <td><%=i; %></td>
+                <% let status;
+                if(parcel.deliveryStatus == 0) {
+                    status = "In magazzino";
+                } else if(parcel.deliveryStatus == 1) {
+                    status = "Consegna in mattinata";
+                } else {
+                    status = "Consegnato";
+                }
+                %>
+                <td><%=status %></td>
+            </tr>
+            <%      i++; }) %>
+            <% } else { %>
 
-        <tr>
-            <td>You haven't parcels!</td>
-        </tr>
+            <tr>
+                <td>You haven't parcels!</td>
+            </tr>
 
-        <% } %>
+            <% } %>
+        </tbody>
     </table>
 </body>
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const parcelController = require('../controllers/parcel.controller');
-var conn = require('../../config/db.config');
+// var conn = require('../../config/db.config');
 
 router.post('/create/', parcelController.create);
 router.get('/all/', parcelController.findAll);

@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Parcels General List</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <!--routing-->
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+    <!-- Leaflet Map -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.css" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
+
     <style>
         table,
         td,
@@ -17,43 +34,40 @@
 </head>
 
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>ID Pacco</th>
-                <th>Stato Pacco</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%
+    <div id="mapid">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Pacco</th>
+                    <th>Stato Pacco</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
             if(parcels.length != 0){
                 var i=1;
                 parcels.forEach(parcel =>{
         %>
 
-            <tr>
-                <td><%=i; %></td>
-                <% let status;
-                if(parcel.deliveryStatus == 0) {
-                    status = "In magazzino";
-                } else if(parcel.deliveryStatus == 1) {
-                    status = "Consegna in mattinata";
-                } else {
-                    status = "Consegnato";
-                }
+                <tr>
+                    <td><%=i; %></td>
+                    <%
+                    var pointXY = L.point(parcel.x, parcel.y);
+                    var pointlatlng = map.layerPointToLatLng(pointXY);
                 %>
-                <td><%=status %></td>
-            </tr>
-            <%      i++; }) %>
-            <% } else { %>
+                    <td><%=pointlatlng %></td>
+                </tr>
+                <%      i++; }) %>
+                <% } else { %>
 
-            <tr>
-                <td>You haven't parcels!</td>
-            </tr>
+                <tr>
+                    <td>You haven't parcels!</td>
+                </tr>
 
-            <% } %>
-        </tbody>
-    </table>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

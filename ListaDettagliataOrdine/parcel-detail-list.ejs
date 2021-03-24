@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Parcels Detail List</title>
+
+	<script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 </head>
 
 <body>
-    <table>
+    <table id="table">
         <thead>
             <th>ID</th>
             <th>Peso</th>
@@ -33,5 +36,16 @@
         <% }) %>
 
     </table>
+    <div id="map" style="width: 250px; height: 200px;"></div>
+        <script>
+            L.mapbox.accessToken = 'pk.eyJ1IjoiYW5uYmFyIiwiYSI6ImNrbWRicDVzdzJqcmEyb3AxYXEyNDUyaGsifQ.OTfQv0UbnWbzFsxA_iT6ww'; 
+            var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+                   attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                   tileSize: 512,
+                   zoomOffset: -1
+            });
+            var map = L.map('map').addLayer(mapboxTiles).setView([<%= parcels[0].x %>,<%= parcels[0].y %>], 13,5);
+            var marker = L.marker([<%= parcels[0].x %>,<%= parcels[0].y %>]).addTo(map);
+        </script>
 </body>
 </html>

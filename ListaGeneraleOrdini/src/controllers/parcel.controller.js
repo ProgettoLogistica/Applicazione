@@ -27,8 +27,7 @@ exports.findByIdUser = function (req, res) {
         if (err)
             res.send(err);
         console.log('res', parcel);
-        // res.json(parcel);
-        res.status(200).render('parcels-general-list', { parcels: parcel });
+        res.json(parcel);
     });
 };
 
@@ -36,7 +35,8 @@ exports.findByIdDeliveryMan = function (req, res) {
     Parcel.findByIdDeliveryMan(req.params.id, function (err, parcel) {
         if (err)
             res.send(err);
-        res.json(parcel);
+        // res.json(parcel);
+        res.status(200).render('parcels-general-list', { parcels: parcel });
     });
 };
 

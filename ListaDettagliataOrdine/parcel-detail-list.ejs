@@ -13,30 +13,18 @@
 
 <body>
     <table id="table">
-        <thead>
-            <th>ID</th>
-            <th>Peso</th>
-            <th>Dimensioni</th>
-            <th>Arrivo in deposito</th>
-            <th>Tentativi di consegna</th>
-            <th>Priorità</th>
-        </thead>
-
-        <%
-                parcels.forEach(parcel => {
-                    %>
-                    <tr>
-                        <td><%= parcel.id %></td>
-                        <td><%= parcel.weight %></td>
-                        <td><%= parcel.height %> x <%= parcel.width %> x <%= parcel.depth %> cm</td>
-                        <td><%= parcel.checkInDate %></td>
-                        <td><%= parcel.deliveryAttempts %></td>
-                        <td><%= parcel.priority %></td>
-                    </tr>
-        <% }) %>
-
+        <tbody align="left">
+            <tr><th>ID</th><td><%= parcels[0].id %></td></tr>
+            <tr><th>Peso</th><td><%= parcels[0].weight %></td></tr>
+            <tr><th>Dimensioni</th>
+                <td><%= parcels[0].height %> x <%= parcels[0].width %> x <%= parcels[0].depth %> cm</td>
+            </tr>
+            <tr><th>Arrivo in deposito</th><td><%= parcels[0].checkInDate %></td></tr>
+            <tr><th>Tentativi di consegna</th><td><%= parcels[0].deliveryAttempts %></td></tr>
+            <tr><th>Priorità</th><td><%= parcels[0].priority %></td></tr>
+        </tbody>
     </table>
-    <div id="map" style="width: 250px; height: 200px;"></div>
+    <div id="map" style="width: 250px; height: 200px; margin-top: 10px;"></div>
         <script>
             L.mapbox.accessToken = 'pk.eyJ1IjoiYW5uYmFyIiwiYSI6ImNrbWRicDVzdzJqcmEyb3AxYXEyNDUyaGsifQ.OTfQv0UbnWbzFsxA_iT6ww'; 
             var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {

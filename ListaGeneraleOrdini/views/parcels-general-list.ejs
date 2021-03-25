@@ -29,19 +29,19 @@
         %>
             <tr>
                 <td><%=i; %></td>
-                <script>
-                    // var map = L.map('mapid')
 
-                    var x = '<%-parcel.x %>';
-                    var y = '<%-parcel.y %>';
-
-                    var pointXY = L.point(x, y);
-
-                    // ! ERRORE !
-                    var pointlatlng = map.layerPointToLatLng(pointXY);
-                    // ! ERRORE !
-                </script>
-                <td id="position"></td>
+                <td id="position">
+                    <script>
+                        function giveAddress(lon, lat) {
+                            fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + lon + '&lat=' + lat).then(function (response) {
+                                return response.json();
+                            }).then(function (json) {
+                                console.log(json.display_name);
+                                document.getElementById('position').innerHTML = json.display_name;
+                            })
+                        }
+                    </script>
+                </td>
             </tr>
             <%      i++; }) %>
             <% } else { %>

@@ -40,7 +40,7 @@
 <body>
 
     <div id="map" style="width: 600px; height: 400px;"></div>
-    <table>
+    <table id="position">
         <thead>
             <tr>
                 <th>ID Pacco</th>
@@ -48,37 +48,39 @@
             </tr>
         </thead>
         <tbody>
-            <%
-            if(parcels.length != 0){
-                var i=1;
-                parcels.forEach(parcel =>{
-        %>
-            <tr>
-                <td><%=i; %></td>
-                <td id="position"></td>
-                <script>
-                    var map = L.map('map').setView(['<%-parcel.x%>', '<%-parcel.y%>'], 13);
+        </tbody>
+        <script>
+            var map = L.map('map').setView(['<%-parcels[1].x%>', '<%-parcels[1].y%>'], 13);
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-                    var geocodeService = L.esri.Geocoding.geocodeService({
-                        apikey: 'AAPK99eff8c9540041998c7241a9cb774d4dgr6TROOMe9-mxOPkaKabxBdAMz0BGNxbYXL-6zd49MnbSjChf5fplWBc7ZEMLDUR'
-                    });
+            var geocodeService = L.esri.Geocoding.geocodeService({
+                apikey: 'AAPK99eff8c9540041998c7241a9cb774d4dgr6TROOMe9-mxOPkaKabxBdAMz0BGNxbYXL-6zd49MnbSjChf5fplWBc7ZEMLDUR'
+            });
 
-                    var latlng = ['<%-parcel.x%>', '<%-parcel.y%>']
-                    geocodeService.reverse().latlng(latlng).run(function (error, result) {
-                        if (error) return;
-                        document.getElementById('position').innerHTML = result.address.Match_addr;
-                        L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup();
-                    });
-                </script>
-                <% i++; }) %>
-                <% } else { %>
+            var i = 1;
+            var table = document.getElementById("position");
+                // Per ogni pacco viene aggiunto il marker sulla mappa e aggiunti i valori relativi al pacco nella tabella
+                <% parcels.forEach(parcel => { %>
+                var latlng = ['<%-parcel.x%>', '<%-parcel.y%>'];
+                geocodeService.reverse().latlng(latlng).run(function (error, result) {
+                    if (error) return;
+                    L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup();
 
-                <% } %>
+                    // Aggiunta alla tabella
+                    var row = table.insertRow(i);
+                    var col1 = row.insertCell(0);
+                    var col2 = row.insertCell(1);
 
+                    // ID - Indirizzo
+                    col1.innerHTML = i;
+                    col2.innerHTML = result.address.Match_addr;
+                    i++;
+                });
+                <% }) %>
+        </script>
 </body>
 
 </html>

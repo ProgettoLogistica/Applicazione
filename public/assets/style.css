@@ -1,0 +1,54 @@
+body{
+    font-family: 'Poppins', sans-serif; 
+    height:100%;
+}
+
+#map{
+    width: 22em;
+    height: 15em; 
+    margin-top: 5em;
+    margin-left: 5em;
+    border-radius: 1em;
+    z-index: 0;
+}
+
+#circle {
+    position: absolute;
+    left: -40em;
+    top: -30em;
+    width: 90rem;
+    height: 78rem;
+    background: #0085FF;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+#container{
+    height:100%;
+}
+
+#table{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 3em;
+    z-index: 0;
+}
+
+#detailTable{
+    position: relative;
+    left: 60%;
+    width: 30em;
+    height: 20em;
+    box-shadow: 0.5em 0.5em 2em #23374D;
+}
+#last-row td, #last-row th{
+    border-bottom: 0.4vh solid #0085FF;
+}
+#detailTable th{
+    color:#23374D;
+}
+
+#detailTable td{
+    color: #0085FF;
+}

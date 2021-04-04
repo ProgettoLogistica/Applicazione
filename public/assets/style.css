@@ -14,14 +14,14 @@ body{
 
 #circle {
     position: absolute;
-    left: -40em;
+    left: -45em;
     top: -30em;
     width: 90rem;
     height: 78rem;
     background: #0085FF;
     border-radius: 50%;
     z-index: -1;
-  }
+}
 
 #container{
     height:100%;
@@ -32,7 +32,6 @@ body{
     height: 100%;
     position: relative;
     top: 3em;
-    z-index: 0;
 }
 
 #detailTable{

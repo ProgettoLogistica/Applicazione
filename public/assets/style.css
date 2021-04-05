@@ -1,13 +1,14 @@
 body{
+    left: 0;
+    top: 0;
     font-family: 'Poppins', sans-serif; 
-    height:100%;
 }
 
 #map{
-    width: 22em;
-    height: 15em; 
-    margin-top: 5em;
-    margin-left: 5em;
+    width: 44em;
+    height: 25em; 
+    margin-top: 3em;
+    margin-left: 3em;
     border-radius: 1em;
     z-index: 0;
 }
@@ -34,8 +35,9 @@ body{
     top: 3em;
 }
 
-#detailTable{
+#detailTable, #position{
     position: relative;
+    top: -15em;
     left: 60%;
     width: 30em;
     height: 20em;
@@ -44,10 +46,32 @@ body{
 #last-row td, #last-row th{
     border-bottom: 0.4vh solid #0085FF;
 }
+
 #detailTable th{
     color:#23374D;
 }
 
-#detailTable td{
+#detailTable td, #position td{
     color: #0085FF;
+}
+
+#position th {
+    background-color: #0085FF;
+}
+
+.navbar {
+    top: 5px;
+    left: 50px;
+}
+
+.navbar a, #list ul li a{
+   padding-right: 100px;
+   color: white;
+   text-transform: uppercase;
+   font-weight: bold;
+}
+
+.navbar a img {
+    height: 80px;
+    width: 80px;
 }

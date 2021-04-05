@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>Reverse geocoding</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Parcels Detail List</title>
 
     <!-- Load Leaflet from CDN -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -27,60 +28,69 @@
         integrity="sha512-vZbMwAf1/rpBExyV27ey3zAEwxelsO4Nf+mfT7s6VTJPUbYmD2KSuTRXTxOFhIYqhajaBU+X5PuFK1QJ1U9Myg=="
         crossorigin=""></script>
 
-    <style>
-        table,
-        td,
-        tr {
-            border: solid 1px black;
-            border-collapse: collapse;
-        }
-    </style>
+    <!-- CSS -->
+    <link href="/assets/style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 </head>
 
 <body>
+    <%- include('../../public/partials/header.ejs')%>
+    <div id="map"></div>
+    <div class="container-sm">
+        <div id="table">
+            <table class="table table-striped" id="position">
+                <thead>
+                    <tr>
+                        <th>ID Pacco</th>
+                        <th>Stato Pacco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <script>
+                    var map = L.map('map').setView(['<%-parcels[1].x%>', '<%-parcels[1].y%>'], 13);
 
-    <div id="map" style="width: 600px; height: 400px;"></div>
-    <table id="position">
-        <thead>
-            <tr>
-                <th>ID Pacco</th>
-                <th>Stato Pacco</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-        <script>
-            var map = L.map('map').setView(['<%-parcels[1].x%>', '<%-parcels[1].y%>'], 13);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+                    var geocodeService = L.esri.Geocoding.geocodeService({
+                        apikey: 'AAPK99eff8c9540041998c7241a9cb774d4dgr6TROOMe9-mxOPkaKabxBdAMz0BGNxbYXL-6zd49MnbSjChf5fplWBc7ZEMLDUR'
+                    });
 
-            var geocodeService = L.esri.Geocoding.geocodeService({
-                apikey: 'AAPK99eff8c9540041998c7241a9cb774d4dgr6TROOMe9-mxOPkaKabxBdAMz0BGNxbYXL-6zd49MnbSjChf5fplWBc7ZEMLDUR'
-            });
-
-            var i = 1;
-            var table = document.getElementById("position");
+                    var i = 1;
+                    var table = document.getElementById("position");
                 // Per ogni pacco viene aggiunto il marker sulla mappa e aggiunti i valori relativi al pacco nella tabella
                 <% parcels.forEach(parcel => { %>
                 var latlng = ['<%-parcel.x%>', '<%-parcel.y%>'];
-                geocodeService.reverse().latlng(latlng).run(function (error, result) {
-                    if (error) return;
-                    L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup();
+                        geocodeService.reverse().latlng(latlng).run(function (error, result) {
+                            if (error) return;
+                            L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup();
 
-                    // Aggiunta alla tabella
-                    var row = table.insertRow(i);
-                    var col1 = row.insertCell(0);
-                    var col2 = row.insertCell(1);
+                            // Aggiunta alla tabella
+                            var row = table.insertRow(i);
+                            var col1 = row.insertCell(0);
+                            var col2 = row.insertCell(1);
 
-                    // ID - Indirizzo
-                    col1.innerHTML = i;
-                    col2.innerHTML = result.address.Match_addr;
-                    i++;
-                });
+                            // ID - Indirizzo
+                            col1.innerHTML = i;
+                            col2.innerHTML = result.address.Match_addr;
+                            i++;
+                        });
                 <% }) %>
-        </script>
+                </script>
+            </table>
+        </div>
+    </div>
+    <div id="circle"></div>
 </body>
 
 </html>
